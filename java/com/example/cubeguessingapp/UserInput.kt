@@ -64,7 +64,7 @@ class UserInput : AppCompatActivity() {
             startActivity(game)
 
             ap.stopAudio()
-
+            this.cacheDir.deleteRecursively()
 
 
 

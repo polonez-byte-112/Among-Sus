@@ -28,8 +28,10 @@ class StartScreen : AppCompatActivity() {
         ap.playAudio(this,R.raw.theme,true)
 
         startButton.setOnClickListener {
+            this.cacheDir.deleteRecursively()
             val start =  Intent(this, UserInput::class.java)
             startActivity(start)
+
         }
 
 

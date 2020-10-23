@@ -16,13 +16,15 @@ object AudioPlay {
 
     fun playAudio(c: Context, id: Int, isLooping: Boolean = true) {
         createMediaPlayer(c, id)
-
+        c.cacheDir.deleteRecursively()
         mediaPlayer?.let {
             it.isLooping = isLooping
 
             if (!it.isPlaying) {
                 it.start()
             }
+
+
         }
     }
 
