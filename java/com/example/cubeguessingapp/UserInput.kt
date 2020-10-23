@@ -60,7 +60,7 @@ class UserInput : AppCompatActivity() {
 
         continueB.setOnClickListener {
 
-            val game = Intent(this, GameMechanics::class.java)
+            val game = Intent(this, Board::class.java)
             startActivity(game)
 
             ap.stopAudio()
