@@ -5,3 +5,5 @@ Game much inspired on "Among Us" .In my Project its only One task from "Inner Sl
 # About Current situation
 Game is still in progress.
 (If I forgot to change description, It is ready if there is Apk version Deployed)
+
+24-25 I am offline 
