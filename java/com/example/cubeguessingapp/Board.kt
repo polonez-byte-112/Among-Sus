@@ -15,9 +15,9 @@ class Board : AppCompatActivity() {
     var currentNeededTile=0;
     var currentRandomTile=0
 
-    val defeat=false
-    val win=false
-
+    var defeat=false
+    var win=false
+    var index=0
 
 
     val ap: AudioPlay = AudioPlay
@@ -55,7 +55,7 @@ class Board : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
 
-
+            displayIndex()
 
         // losowanie  pierwszego miejsca na niebieski
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
@@ -64,7 +64,7 @@ class Board : AppCompatActivity() {
         object : CountDownTimer(800, 800) {
             override fun onTick(arg0: Long) {
 
-
+                index=0
                 changeTileColorToBlue()
                 currentNeededTile=currentRandomTile
 
@@ -86,6 +86,8 @@ class Board : AppCompatActivity() {
             currentClickedTile=1
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
+
 
 
         }
@@ -95,6 +97,7 @@ class Board : AppCompatActivity() {
             currentClickedTile=2
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
 
@@ -103,6 +106,7 @@ class Board : AppCompatActivity() {
             currentClickedTile=3
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
 
@@ -110,12 +114,14 @@ class Board : AppCompatActivity() {
             currentClickedTile=4
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
         upB5.setOnClickListener{
             currentClickedTile=5
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
 
@@ -123,6 +129,7 @@ class Board : AppCompatActivity() {
             currentClickedTile=6
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
 
@@ -130,6 +137,7 @@ class Board : AppCompatActivity() {
             currentClickedTile=7
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
 
@@ -137,6 +145,7 @@ class Board : AppCompatActivity() {
             currentClickedTile=8
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
 
 
@@ -144,12 +153,15 @@ class Board : AppCompatActivity() {
             currentClickedTile=9
             println(currentClickedTile)
             playSound()
+            checkIfClickedCorrect()
         }
     }
 
 
 
-
+    fun displayIndex(){
+        counterTextView.setText("Done: "+ index+"/10")
+    }
     // protyp jak zmieniac muzyke
     fun playSound(){
 
@@ -185,15 +197,16 @@ class Board : AppCompatActivity() {
     }
     fun changeTileColorToBlue(){
         when (currentRandomTile) {
-            0 -> downB1.setBackgroundColor(Color.parseColor("#42aaff"))
-            1 -> downB2.setBackgroundColor(Color.parseColor("#42aaff"))
-            2 -> downB3.setBackgroundColor(Color.parseColor("#42aaff"))
-            3 -> downB4.setBackgroundColor(Color.parseColor("#42aaff"))
-            4 -> downB5.setBackgroundColor(Color.parseColor("#42aaff"))
-            5 -> downB6.setBackgroundColor(Color.parseColor("#42aaff"))
-            6 -> downB7.setBackgroundColor(Color.parseColor("#42aaff"))
-            7 -> downB8.setBackgroundColor(Color.parseColor("#42aaff"))
-            8 -> downB9.setBackgroundColor(Color.parseColor("#42aaff"))
+
+            1 -> downB1.setBackgroundColor(Color.parseColor("#42aaff"))
+            2 -> downB2.setBackgroundColor(Color.parseColor("#42aaff"))
+            3 -> downB3.setBackgroundColor(Color.parseColor("#42aaff"))
+            4 -> downB4.setBackgroundColor(Color.parseColor("#42aaff"))
+            5 -> downB5.setBackgroundColor(Color.parseColor("#42aaff"))
+            6 -> downB6.setBackgroundColor(Color.parseColor("#42aaff"))
+            7 -> downB7.setBackgroundColor(Color.parseColor("#42aaff"))
+            8 -> downB8.setBackgroundColor(Color.parseColor("#42aaff"))
+            9 -> downB9.setBackgroundColor(Color.parseColor("#42aaff"))
         }
     }
     fun changeAllTileColorToBlack(){
@@ -207,11 +220,34 @@ class Board : AppCompatActivity() {
         downB8.setBackgroundColor(Color.parseColor("#000000"))
         downB9.setBackgroundColor(Color.parseColor("#000000"))
     }
-    fun checkIfClickedCorrect(){}
+
+    fun checkIfClickedCorrect(){
+
+        if(currentClickedTile!=currentNeededTile){
+            defeat=true
+            win=false
+
+            println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
+            println("Przegrana!!")
+        }
+
+        if(currentClickedTile==currentNeededTile){
+            // dodajemy po numerze index który trzeba jakos przypisac
+            //np tako  correctTile[index] = currentClickedTile  cos takiego
+
+            correctTiles[index] = currentClickedTile
+
+            changeIndex()
+            displayIndex()
+
+        }
+
+    }
 
 
 
     //funkcja która w zaleznosci od ilosci tiles do zmienienia na niebieski, to robi  bez zamieszania
+     //czyli kilka animacji na raz   np 0 robi tylko jedną  1 robi wiecej etc etc
     fun changeColor(i: Int?){
         //tutaj funkcja która będzie zmieniać kolor
 
@@ -228,6 +264,25 @@ class Board : AppCompatActivity() {
             9-> println("Changing color for 10")
 
         }
+    }
+
+
+    fun changeIndex(){
+        when(index){
+        0-> index=1
+        1-> index=2
+        2->index=3
+        3-> index=4
+        4-> index=5
+        5-> index=6
+        6-> index=7
+        7-> index=8
+        8->index=9
+        9-> println("Ostatni index, bez zmian")
+        }
+
+
+        println("Nowy index : "+index)
     }
 
 
