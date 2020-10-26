@@ -61,20 +61,7 @@ class Board : AppCompatActivity() {
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
 
         //wyswietlanie pierwszej liczby (zrobic podobnie w przyszlosci
-        object : CountDownTimer(800, 800) {
-            override fun onTick(arg0: Long) {
-
-                index=0
-                changeTileColorToBlue()
-                currentNeededTile=currentRandomTile
-
-
-            }
-
-            override fun onFinish() {
-                changeAllTileColorToBlack()
-            }
-        }.start()
+      animationForOne()
 
 
 
@@ -106,7 +93,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=3
             println(currentClickedTile)
             playSound()
+
             checkIfClickedCorrect()
+
         }
 
 
@@ -159,8 +148,28 @@ class Board : AppCompatActivity() {
 
 
 
-    fun displayIndex(){
-        counterTextView.setText("Done: "+ index+"/10")
+    fun checkIfClickedCorrect(){
+
+        if(currentClickedTile!=currentNeededTile){
+            defeat=true
+            win=false
+
+            println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
+            println("Przegrana!!")
+        }
+
+        if(currentClickedTile==currentNeededTile){
+            // dodajemy po numerze index który trzeba jakos przypisac
+            //np tako  correctTile[index] = currentClickedTile  cos takiego
+
+            correctTiles[index] = currentClickedTile
+
+            changeIndex()
+            displayIndex()
+            //  zmieniamy kolor dla nowego
+            changeColor(index)
+        }
+
     }
     // protyp jak zmieniac muzyke
     fun playSound(){
@@ -220,52 +229,25 @@ class Board : AppCompatActivity() {
         downB8.setBackgroundColor(Color.parseColor("#000000"))
         downB9.setBackgroundColor(Color.parseColor("#000000"))
     }
-
-    fun checkIfClickedCorrect(){
-
-        if(currentClickedTile!=currentNeededTile){
-            defeat=true
-            win=false
-
-            println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
-            println("Przegrana!!")
-        }
-
-        if(currentClickedTile==currentNeededTile){
-            // dodajemy po numerze index który trzeba jakos przypisac
-            //np tako  correctTile[index] = currentClickedTile  cos takiego
-
-            correctTiles[index] = currentClickedTile
-
-            changeIndex()
-            displayIndex()
-
-        }
-
-    }
-
-
-
     //funkcja która w zaleznosci od ilosci tiles do zmienienia na niebieski, to robi  bez zamieszania
-     //czyli kilka animacji na raz   np 0 robi tylko jedną  1 robi wiecej etc etc
+    //czyli kilka animacji na raz   np 0 robi tylko jedną  1 robi wiecej etc etc
     fun changeColor(i: Int?){
         //tutaj funkcja która będzie zmieniać kolor
 
         when(i){
-            0-> println("Changing color for 1")
-            1-> println("Changing color for 2")
-            2->println("Changing color for 3")
-            3-> println("Changing color for 4")
-            4->println("Changing color for 5")
-            5-> println("Changing color for 6")
-            6->println("Changing color for 7")
-            7-> println("Changing color for 8")
-            8->println("Changing color for 9")
-            9-> println("Changing color for 10")
+           // 0-> animationForOne()
+            1-> animationForTwo()
+            2-> animationForThree()
+            3-> animationForFour()
+            4-> animationForFive()
+            5-> animationForSix()
+            6->animationForSeven()
+            7-> animationForEight()
+            8->animationForNine()
+            9-> animationForTen()
 
         }
     }
-
 
     fun changeIndex(){
         when(index){
@@ -284,9 +266,138 @@ class Board : AppCompatActivity() {
 
         println("Nowy index : "+index)
     }
+    fun displayIndex(){
+        counterTextView.setText("Current: "+ (index+1)+"/10")
+    }
 
 
+    //Animacje
+    fun breakAnimation(){
+        object : CountDownTimer(1000, 1000) {
+            override fun onTick(arg0: Long) {
 
+
+                changeAllTileColorToBlack()
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+            }
+        }.start()
+    }
+
+
+    fun animationForOne(){
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(800, 800) {
+            override fun onTick(arg0: Long) {
+
+                index=0
+                changeTileColorToBlue()
+                currentNeededTile=currentRandomTile
+
+
+                println("OBECNA ANIMACJA : "+1)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+            }
+        }.start()
+    }
+
+    fun animationForTwo(){
+        animationForOne()
+        breakAnimation()
+
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(800, 800) {
+            override fun onTick(arg0: Long) {
+
+                index=1
+                changeTileColorToBlue()
+                currentNeededTile=currentRandomTile
+                println("OBECNA ANIMACJA : "+2)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+            }
+        }.start()
+
+
+    }
+
+    fun animationForThree(){
+        animationForTwo()
+        breakAnimation()
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(800, 800) {
+            override fun onTick(arg0: Long) {
+
+                index=2
+                changeTileColorToBlue()
+                currentNeededTile=currentRandomTile
+
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+            }
+        }.start()
+    }
+
+    fun animationForFour(){
+        animationForThree()
+        breakAnimation()
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(800, 800) {
+            override fun onTick(arg0: Long) {
+
+                index=3
+                changeTileColorToBlue()
+                currentNeededTile=currentRandomTile
+
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+            }
+        }.start()
+    }
+
+
+    // ponizej nie zmienione narazie
+
+
+    fun animationForFive(){
+        animationForFour()
+    }
+
+    fun animationForSix(){
+        animationForFive()
+    }
+
+    fun animationForSeven(){
+        animationForSix()
+    }
+
+    fun animationForEight(){
+        animationForSeven()
+    }
+
+    fun animationForNine(){
+        animationForEight()
+    }
+
+    fun animationForTen(){
+        animationForNine()
+    }
 
 
 
