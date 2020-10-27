@@ -1,6 +1,7 @@
 package com.example.cubeguessingapp
 
 import android.graphics.Color
+import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ class Board : AppCompatActivity() {
     var win=false
     var index=0
 
+    var countTick =0
 
     val ap: AudioPlay = AudioPlay
 
@@ -51,27 +53,18 @@ class Board : AppCompatActivity() {
      *
      */
 
+
+    // check
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
 
-            displayIndex()
-
-        // losowanie  pierwszego miejsca na niebieski
-        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
-
-        //wyswietlanie pierwszej liczby (zrobic podobnie w przyszlosci
-      animationForOne()
-
-
-
-
-
-
+        displayIndex()
+        animationForOne()
 
         upB1.setOnClickListener{
             currentClickedTile=1
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
 
@@ -82,7 +75,7 @@ class Board : AppCompatActivity() {
 
         upB2.setOnClickListener{
             currentClickedTile=2
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
@@ -91,7 +84,7 @@ class Board : AppCompatActivity() {
         upB3.setOnClickListener{
 
             currentClickedTile=3
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
 
             checkIfClickedCorrect()
@@ -101,14 +94,14 @@ class Board : AppCompatActivity() {
 
         upB4.setOnClickListener{
             currentClickedTile=4
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
 
         upB5.setOnClickListener{
             currentClickedTile=5
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
@@ -116,7 +109,7 @@ class Board : AppCompatActivity() {
 
         upB6.setOnClickListener{
             currentClickedTile=6
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
@@ -124,7 +117,7 @@ class Board : AppCompatActivity() {
 
         upB7.setOnClickListener{
             currentClickedTile=7
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
@@ -132,7 +125,7 @@ class Board : AppCompatActivity() {
 
         upB8.setOnClickListener{
             currentClickedTile=8
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
@@ -140,7 +133,7 @@ class Board : AppCompatActivity() {
 
         upB9.setOnClickListener{
             currentClickedTile=9
-            println(currentClickedTile)
+            println("Current Clicked : "+ currentClickedTile)
             playSound()
             checkIfClickedCorrect()
         }
@@ -156,6 +149,11 @@ class Board : AppCompatActivity() {
 
             println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
             println("Przegrana!!")
+            index=0
+            correctTiles= IntArray(10)
+            displayIndex()
+            breakAnimation()
+            animationForOne()
         }
 
         if(currentClickedTile==currentNeededTile){
@@ -171,16 +169,8 @@ class Board : AppCompatActivity() {
         }
 
     }
-    // protyp jak zmieniac muzyke
+
     fun playSound(){
-
-
-
-
-
-
-
-
 
         if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click,false)
@@ -205,7 +195,7 @@ class Board : AppCompatActivity() {
 
     }
     fun changeTileColorToBlue(){
-        when (currentRandomTile) {
+        when (currentNeededTile) {
 
             1 -> downB1.setBackgroundColor(Color.parseColor("#42aaff"))
             2 -> downB2.setBackgroundColor(Color.parseColor("#42aaff"))
@@ -235,7 +225,7 @@ class Board : AppCompatActivity() {
         //tutaj funkcja która będzie zmieniać kolor
 
         when(i){
-           // 0-> animationForOne()
+            0-> animationForOne()
             1-> animationForTwo()
             2-> animationForThree()
             3-> animationForFour()
@@ -273,12 +263,11 @@ class Board : AppCompatActivity() {
 
     //Animacje
     fun breakAnimation(){
+
         object : CountDownTimer(1000, 1000) {
             override fun onTick(arg0: Long) {
 
-
                 changeAllTileColorToBlack()
-
             }
 
             override fun onFinish() {
@@ -287,15 +276,16 @@ class Board : AppCompatActivity() {
         }.start()
     }
 
-
     fun animationForOne(){
-        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
-        object : CountDownTimer(800, 800) {
+
+                currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(1000, 1000) {
             override fun onTick(arg0: Long) {
 
                 index=0
-                changeTileColorToBlue()
                 currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+
 
 
                 println("OBECNA ANIMACJA : "+1)
@@ -306,98 +296,223 @@ class Board : AppCompatActivity() {
                 changeAllTileColorToBlack()
             }
         }.start()
-    }
 
+    }
     fun animationForTwo(){
-        animationForOne()
-        breakAnimation()
+
+
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
-        object : CountDownTimer(800, 800) {
+
+
+        object : CountDownTimer(2000, 1000) {
             override fun onTick(arg0: Long) {
 
+                countTick++
+                println("Count Tick : "+ countTick)
+
                 index=1
-                changeTileColorToBlue()
+
                 currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+
                 println("OBECNA ANIMACJA : "+2)
 
             }
 
             override fun onFinish() {
                 changeAllTileColorToBlack()
+                countTick=0
             }
         }.start()
 
 
     }
-
     fun animationForThree(){
-        animationForTwo()
-        breakAnimation()
+
+
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
-        object : CountDownTimer(800, 800) {
+        object : CountDownTimer(3000, 1000) {
             override fun onTick(arg0: Long) {
+                countTick++
+                println("Count Tick : "+ countTick)
 
                 index=2
-                changeTileColorToBlue()
                 currentNeededTile=currentRandomTile
-
+                changeTileColorToBlue()
+                println("OBECNA ANIMACJA "+3)
 
             }
 
             override fun onFinish() {
                 changeAllTileColorToBlack()
+                countTick=0
             }
         }.start()
     }
-
     fun animationForFour(){
-        animationForThree()
-        breakAnimation()
+
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
-        object : CountDownTimer(800, 800) {
+        object : CountDownTimer(4000, 1000) {
             override fun onTick(arg0: Long) {
+                countTick++
+                println("Count Tick : "+ countTick)
+
 
                 index=3
-                changeTileColorToBlue()
                 currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
 
+                println("OBECNA ANIMACJA "+4)
 
             }
 
             override fun onFinish() {
                 changeAllTileColorToBlack()
+                countTick=0
             }
         }.start()
     }
-
-
-    // ponizej nie zmienione narazie
-
-
     fun animationForFive(){
-        animationForFour()
-    }
 
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(5000, 1000) {
+            override fun onTick(arg0: Long) {
+
+                countTick++
+                println("Count Tick : "+ countTick)
+
+                index=4
+                currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+                println("OBECNA ANIMACJA "+5)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+                countTick=0
+            }
+        }.start()
+    }
     fun animationForSix(){
-        animationForFive()
-    }
 
-    fun animationForSeven(){
-        animationForSix()
-    }
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(6000, 1000) {
+            override fun onTick(arg0: Long) {
 
+                countTick++
+                println("Count Tick : "+ countTick)
+
+                index=5
+                currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+
+                println("OBECNA ANIMACJA "+6)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+                countTick=0
+            }
+        }.start()
+    }
+    fun animationForSeven() {
+
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(7000, 1000) {
+            override fun onTick(arg0: Long) {
+                countTick++
+                println("Count Tick : "+ countTick)
+
+                index=6
+                currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+                println("OBECNA ANIMACJA "+7)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+                countTick=0
+            }
+        }.start()
+    }
     fun animationForEight(){
-        animationForSeven()
-    }
 
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(8000, 1000) {
+            override fun onTick(arg0: Long) {
+
+                countTick++
+                println("Count Tick : "+ countTick)
+
+                index=7
+                currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+                println("OBECNA ANIMACJA "+8)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+
+                countTick=0
+            }
+        }.start()
+    }
     fun animationForNine(){
-        animationForEight()
-    }
 
-    fun animationForTen(){
-        animationForNine()
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(9000, 1000) {
+            override fun onTick(arg0: Long) {
+                countTick++
+                println("Count Tick : "+ countTick)
+
+                index=8
+                currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+
+                println("OBECNA ANIMACJA "+9)
+
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+                countTick=0
+            }
+        }.start()
     }
+    fun animationForTen(){
+        if(index<=9){
+            countTick++
+            println("Count Tick : "+ countTick)
+
+        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        object : CountDownTimer(10000, 1000) {
+            override fun onTick(arg0: Long) {
+
+                index=9
+                currentNeededTile=currentRandomTile
+                changeTileColorToBlue()
+                println("OBECNA ANIMACJA "+10)
+                counterTextView.setText("Current: 10 / 10")
+            }
+
+            override fun onFinish() {
+                changeAllTileColorToBlack()
+                countTick=0
+            }
+        }.start()
+    }}
+
+
+
+
+
+
+
 
 
 
