@@ -250,7 +250,7 @@ class Board : AppCompatActivity() {
         6-> index=7
         7-> index=8
         8->index=9
-        9-> println("Ostatni index, bez zmian")
+        9-> index=10
         }
 
 
@@ -288,7 +288,7 @@ class Board : AppCompatActivity() {
 
 
 
-                println("OBECNA ANIMACJA : "+1)
+
 
             }
 
@@ -316,7 +316,7 @@ class Board : AppCompatActivity() {
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
 
-                println("OBECNA ANIMACJA : "+2)
+
 
             }
 
@@ -340,7 +340,7 @@ class Board : AppCompatActivity() {
                 index=2
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
-                println("OBECNA ANIMACJA "+3)
+
 
             }
 
@@ -363,7 +363,7 @@ class Board : AppCompatActivity() {
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
 
-                println("OBECNA ANIMACJA "+4)
+
 
             }
 
@@ -385,7 +385,7 @@ class Board : AppCompatActivity() {
                 index=4
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
-                println("OBECNA ANIMACJA "+5)
+
 
             }
 
@@ -408,7 +408,7 @@ class Board : AppCompatActivity() {
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
 
-                println("OBECNA ANIMACJA "+6)
+
 
             }
 
@@ -429,7 +429,7 @@ class Board : AppCompatActivity() {
                 index=6
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
-                println("OBECNA ANIMACJA "+7)
+
 
             }
 
@@ -451,7 +451,7 @@ class Board : AppCompatActivity() {
                 index=7
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
-                println("OBECNA ANIMACJA "+8)
+
 
             }
 
@@ -474,7 +474,7 @@ class Board : AppCompatActivity() {
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
 
-                println("OBECNA ANIMACJA "+9)
+
 
             }
 
@@ -486,17 +486,17 @@ class Board : AppCompatActivity() {
     }
     fun animationForTen(){
         if(index<=9){
-            countTick++
-            println("Count Tick : "+ countTick)
+
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(10000, 1000) {
             override fun onTick(arg0: Long) {
-
+                countTick++
+                println("Count Tick : "+ countTick)
                 index=9
                 currentNeededTile=currentRandomTile
                 changeTileColorToBlue()
-                println("OBECNA ANIMACJA "+10)
+
                 counterTextView.setText("Current: 10 / 10")
             }
 
