@@ -2,9 +2,8 @@ package com.example.cubeguessingapp
 
 
 import android.content.Intent
-import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_start_screen.*
 
 class StartScreen : AppCompatActivity() {

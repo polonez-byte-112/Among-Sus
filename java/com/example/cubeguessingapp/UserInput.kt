@@ -8,13 +8,12 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_user_input.*
 
 
-class UserInput : AppCompatActivity() {
+ class UserInput : AppCompatActivity() {
 
 
     val ap : AudioPlay= AudioPlay
-    val ss : StartScreen= StartScreen()
 
-    var color="white"
+   var color="white"
 
     var name=""
 
@@ -22,7 +21,7 @@ class UserInput : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_input)
 
-        name= usernnameEditText.text.toString();
+     //   name= usernnameEditText.text.toString()
 
         ap.continuePlaying(this, R.raw.theme)
 
@@ -61,6 +60,13 @@ class UserInput : AppCompatActivity() {
         continueB.setOnClickListener {
 
             val game = Intent(this, Board::class.java)
+            name= usernnameEditText.text.toString()
+
+
+            game.putExtra("Color", color)
+            game.putExtra("Name", name)
+
+
             startActivity(game)
 
             ap.stopAudio()
@@ -90,6 +96,13 @@ class UserInput : AppCompatActivity() {
 
 
     }
+
+
+
+     override fun onDestroy() {
+         super.onDestroy()
+        ap.stopAudio()
+     }
 
 
 }

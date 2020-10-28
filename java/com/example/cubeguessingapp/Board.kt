@@ -1,63 +1,38 @@
 package com.example.cubeguessingapp
 
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_board.*
+import java.util.*
 
 class Board : AppCompatActivity() {
-//jezeli przycisk na gorze ma ten sam numer co na dole to niech bd dobrze
- // nie mieszac 10 z 9 bo 9 to liczba przyciskow a 10 to liczba wszystkich tych
-    var isTrue= BooleanArray(10)
+
     var correctTiles = IntArray(10)
     var currentClickedTile =0
-    var currentNeededTile=0;
+    var currentNeededTile=0
     var currentRandomTile=0
 
-    var defeat=false
-    var win=false
+
     var index=0
+    var isEnd=false
 
     var countTick =0
+
+    var takedColor=""
+    var takedName=""
 
     val ap: AudioPlay = AudioPlay
 
 
-
-    /** NOTATKI
-     *         //tez naprawic pod kątem żeby to nie było tutaj albo tylko jeden przycisk tutaj a potem reszta po przyciskach bo to on create jest!!
-
-    //fajnie zmienia kolor/* w zaleznosci od isTrue tylko ze isTrue ma wyswietlac ile jest  x/10
-
-    for(i in 9 downTo 0 step 1){
-
-    if(isTrue[i]==true){
-
-    when(i){
-    0->downB1.setBackgroundColor(Color.parseColor("#42aaff"))
-    1->downB2.setBackgroundColor(Color.parseColor("#42aaff"))
-    2->downB3.setBackgroundColor(Color.parseColor("#42aaff"))
-    3->downB4.setBackgroundColor(Color.parseColor("#42aaff"))
-    4->downB5.setBackgroundColor(Color.parseColor("#42aaff"))
-    5->downB6.setBackgroundColor(Color.parseColor("#42aaff"))
-    6->downB7.setBackgroundColor(Color.parseColor("#42aaff"))
-    7->downB8.setBackgroundColor(Color.parseColor("#42aaff"))
-    8->downB9.setBackgroundColor(Color.parseColor("#42aaff"))
-    }
-    }
-
-    }
-    */
-     *
-     */
-
-
-    // check
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_board)
+
+        takedColor=intent.getStringExtra("Color").toString()
+        takedName=intent.getStringExtra("Name").toString()
 
         displayIndex()
         animationForOne()
@@ -139,21 +114,19 @@ class Board : AppCompatActivity() {
         }
     }
 
-
-
     fun checkIfClickedCorrect(){
 
         if(currentClickedTile!=currentNeededTile){
-            defeat=true
-            win=false
 
             println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
-            println("Przegrana!!")
+            defeat()
+/*
             index=0
             correctTiles= IntArray(10)
             displayIndex()
             breakAnimation()
             animationForOne()
+ */
         }
 
         if(currentClickedTile==currentNeededTile){
@@ -164,12 +137,14 @@ class Board : AppCompatActivity() {
 
             changeIndex()
             displayIndex()
+
+           if(isEnd==true){ checkWin()}
             //  zmieniamy kolor dla nowego
             changeColor(index)
+
         }
 
     }
-
     fun playSound(){
 
         if(currentClickedTile!=0){
@@ -219,8 +194,7 @@ class Board : AppCompatActivity() {
         downB8.setBackgroundColor(Color.parseColor("#000000"))
         downB9.setBackgroundColor(Color.parseColor("#000000"))
     }
-    //funkcja która w zaleznosci od ilosci tiles do zmienienia na niebieski, to robi  bez zamieszania
-    //czyli kilka animacji na raz   np 0 robi tylko jedną  1 robi wiecej etc etc
+
     fun changeColor(i: Int?){
         //tutaj funkcja która będzie zmieniać kolor
 
@@ -250,7 +224,7 @@ class Board : AppCompatActivity() {
         6-> index=7
         7-> index=8
         8->index=9
-        9-> index=10
+        9->isEnd=true
         }
 
 
@@ -262,19 +236,7 @@ class Board : AppCompatActivity() {
 
 
     //Animacje
-    fun breakAnimation(){
 
-        object : CountDownTimer(1000, 1000) {
-            override fun onTick(arg0: Long) {
-
-                changeAllTileColorToBlack()
-            }
-
-            override fun onFinish() {
-                changeAllTileColorToBlack()
-            }
-        }.start()
-    }
 
     fun animationForOne(){
 
@@ -310,11 +272,19 @@ class Board : AppCompatActivity() {
 
                 countTick++
                 println("Count Tick : "+ countTick)
-
                 index=1
 
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+                if(countTick==1 && countTick<2){
+                    currentNeededTile= correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=currentRandomTile
+                    changeTileColorToBlue()
+                }
+
 
 
 
@@ -335,11 +305,29 @@ class Board : AppCompatActivity() {
         object : CountDownTimer(3000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
+                index=2
                 println("Count Tick : "+ countTick)
 
-                index=2
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=currentRandomTile
+                    changeTileColorToBlue()
+                }
+
+
+
 
 
             }
@@ -359,10 +347,33 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
 
-                index=3
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
 
+
+                index=3
+
+
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
 
 
             }
@@ -383,8 +394,38 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
                 index=4
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+
+
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[3]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==5) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
+
+
 
 
             }
@@ -405,8 +446,43 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
                 index=5
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+
+
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[3]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==5){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[4]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==6) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
+
 
 
 
@@ -427,8 +503,46 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
                 index=6
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[3]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==5){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[4]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==6){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[5]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==7) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
 
 
             }
@@ -449,8 +563,52 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
                 index=7
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[3]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==5){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[4]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==6){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[5]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==7){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[6]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==8) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
 
 
             }
@@ -471,8 +629,59 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
                 index=8
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[3]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==5){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[4]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==6){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[5]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==7){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[6]
+                    changeTileColorToBlue()
+                }
+
+
+                if(countTick==8){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[7]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==9) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
 
 
 
@@ -485,7 +694,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForTen(){
-        if(index<=9){
+        if(isEnd==false){
 
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
@@ -493,11 +702,69 @@ class Board : AppCompatActivity() {
             override fun onTick(arg0: Long) {
                 countTick++
                 println("Count Tick : "+ countTick)
-                index=9
-                currentNeededTile=currentRandomTile
-                changeTileColorToBlue()
-
                 counterTextView.setText("Current: 10 / 10")
+                index=9
+                if(countTick==1){
+                    currentNeededTile=correctTiles[0]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==2){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[1]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==3){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[2]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==4){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[3]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==5){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[4]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==6){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[5]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==7){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[6]
+                    changeTileColorToBlue()
+                }
+
+
+                if(countTick==8){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[7]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==9){
+                    changeAllTileColorToBlack()
+                    currentNeededTile=correctTiles[8]
+                    changeTileColorToBlue()
+                }
+
+                if(countTick==10) {
+                    changeAllTileColorToBlack()
+                    currentNeededTile = currentRandomTile
+                    changeTileColorToBlue()
+                }
+
+
             }
 
             override fun onFinish() {
@@ -506,6 +773,35 @@ class Board : AppCompatActivity() {
             }
         }.start()
     }}
+
+
+    fun checkWin(){
+
+        println(Arrays.toString(correctTiles))
+        var countGoodOnes=0
+        for (x in 9 downTo 0 step 1){
+
+            if(correctTiles[x]>0){
+                countGoodOnes++
+            }
+        }
+
+
+        if(countGoodOnes==10){
+            val winner = Intent(this, Win::class.java)
+            startActivity(winner)
+        }
+    }
+
+    fun defeat(){
+        val fail = Intent(this, Defeat::class.java)
+        fail.putExtra("Color", takedColor)
+        fail.putExtra("username", takedName)
+        startActivity(fail)
+    }
+
+
+
 
 
 
