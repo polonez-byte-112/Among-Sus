@@ -13,3 +13,6 @@ Game is still in progress.
 (If I forgot to change description, It is ready if there is Apk version Deployed)
 
 24-25 I am offline 
+
+If I wont die :D project should be around Tomorrow or next Monday.
+I got long holidays 
