@@ -789,6 +789,7 @@ class Board : AppCompatActivity() {
 
         if(countGoodOnes==10){
             val winner = Intent(this, Win::class.java)
+            winner.putExtra("name", takedName)
             startActivity(winner)
         }
     }
