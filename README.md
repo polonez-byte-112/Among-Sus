@@ -9,10 +9,4 @@ To install it make a project with same name (and no activity) and copy those fil
 
 
 # About Current situation
-Game is still in progress.
-(If I forgot to change description, It is ready if there is Apk version Deployed)
-
-24-25 I am offline 
-
-If I wont die :D project should be around Tomorrow or next Monday.
-I got long holidays 
+Game v2 in progress
