@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_board.*
+import java.lang.reflect.Array
 import java.util.*
 
 class Board : AppCompatActivity() {
@@ -16,11 +17,22 @@ class Board : AppCompatActivity() {
     var currentRandomTile=0
     var currentTileToLightUp=0
 
+    var random2=0
+    var random3=0
+    var random4=0
+    var random5=0
+    var random6=0
+    var random7=0
+    var random8=0
+    var random9=0
+    var random10=0
+
 
     var index=0
     var isEnd=false
 
     var countTick =0
+    var countClicks=0
 
     var takedColor=""
     var takedName=""
@@ -284,8 +296,8 @@ var currentAnimation=0
         currentAnimation=2
 
 
-        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
-
+        currentRandomTile  = (Math.floor(Math.random()*9)+1).toInt()
+        random2=currentRandomTile
 
         object : CountDownTimer(2000, 1000) {
             override fun onTick(arg0: Long) {
@@ -325,6 +337,7 @@ var currentAnimation=0
         currentAnimation=3
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random3=currentRandomTile
         object : CountDownTimer(3000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
@@ -367,6 +380,7 @@ var currentAnimation=0
     fun animationForFour(){
         currentAnimation=4
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random4=currentRandomTile
         object : CountDownTimer(4000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
@@ -416,7 +430,8 @@ var currentAnimation=0
     }
     fun animationForFive(){
         currentAnimation=5
-        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+       currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random5=currentRandomTile
         object : CountDownTimer(5000, 1000) {
             override fun onTick(arg0: Long) {
 
@@ -474,6 +489,7 @@ var currentAnimation=0
     fun animationForSix(){
         currentAnimation=6
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random6=currentRandomTile
         object : CountDownTimer(6000, 1000) {
             override fun onTick(arg0: Long) {
 
@@ -538,6 +554,7 @@ var currentAnimation=0
     fun animationForSeven() {
         currentAnimation=7
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random7=currentRandomTile
         object : CountDownTimer(7000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
@@ -605,6 +622,7 @@ var currentAnimation=0
     fun animationForEight(){
         currentAnimation=8
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random8=currentRandomTile
         object : CountDownTimer(8000, 1000) {
             override fun onTick(arg0: Long) {
 
@@ -680,6 +698,7 @@ var currentAnimation=0
     fun animationForNine(){
         currentAnimation=9
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+        random9=currentRandomTile
         object : CountDownTimer(9000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
@@ -763,7 +782,8 @@ var currentAnimation=0
         if(isEnd==false){
             currentAnimation=10
 
-        currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+            currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
+            random10=currentRandomTile
         object : CountDownTimer(10000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
@@ -872,6 +892,9 @@ var currentAnimation=0
     }
 
     fun defeat(){
+
+
+
         currentAnimation=0
         val fail = Intent(this, Defeat::class.java)
         fail.putExtra("Color", takedColor)
@@ -887,6 +910,8 @@ var currentAnimation=0
     fun changeMechanics(){
         //upewniamy sie ze jest wcisniete by potem nie trzeba było
         if(isClicked==true){
+            isClicked=false
+
             when(currentAnimation){
                 1-> mech1()
                 2-> mech2()
@@ -903,21 +928,68 @@ var currentAnimation=0
     }
 
     fun mech1(){
+        println("MECHANIZM 1 DZIALA")
 
-        if(currentNeededTile!=currentClickedTile){
+
+
+        if(currentNeededTile==currentClickedTile){
+
+            correctTiles[index]=currentNeededTile
+            println("Correct Tiles  :"+Arrays.toString(correctTiles))
+            changeIndex()
+            displayIndex()
+            changeColor(index)
+            countClicks=0
+        }else{
             println("Zły przycisk wcisniety")
             println("")
             println("Potrzeba : "+ currentNeededTile+", Wcisniety: "+currentClickedTile)
             defeat()
         }
 
-        if(currentNeededTile==currentClickedTile){
-            correctTiles[0]==currentNeededTile
-        }
-
     }
 
-    fun mech2(){}
+    fun mech2(){
+
+
+        println("MECHANIZM 2 DZIALA")
+
+
+
+        if(countClicks==0 ){
+
+            if(correctTiles[0].equals(currentClickedTile)){
+                println("Wcisniety 1 ponownie :O")
+                countClicks=countClicks+1
+            }else{
+                println("Zły przycisk wcisniety")
+                println("")
+                println("Potrzeba : "+ correctTiles[0]+", Wcisniety: "+currentClickedTile)
+                defeat()
+            }
+        }else if(countClicks==1){
+            println("Teraz pora na drugi !!!")
+            if(currentClickedTile==random2){
+                println("Przycisk 2 wcisniety kurwa XDDD")
+                println("Obecny index :"+index)
+                correctTiles[index]=random2
+                println("Correct Tiles  :"+Arrays.toString(correctTiles))
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=countClicks+1
+            }else{
+                println("Zły przycisk wcisniety")
+                println("")
+                println("Potrzeba : "+ correctTiles+", Wcisniety: "+currentClickedTile)
+                defeat()
+            }
+
+        }
+
+        println("Wcisniecia" +countClicks)
+
+    }
 
     fun mech3(){}
 
