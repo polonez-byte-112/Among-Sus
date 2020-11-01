@@ -14,6 +14,7 @@ class Board : AppCompatActivity() {
     var currentClickedTile =0
     var currentNeededTile=0
     var currentRandomTile=0
+    var currentTileToLightUp=0
 
 
     var index=0
@@ -23,6 +24,9 @@ class Board : AppCompatActivity() {
 
     var takedColor=""
     var takedName=""
+var currentAnimation=0
+
+    var isClicked=true
 
     val ap: AudioPlay = AudioPlay
 
@@ -41,7 +45,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=1
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+        //    checkIfClickedCorrect()
+            changeMechanics()
 
 
 
@@ -52,7 +58,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=2
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+         //   checkIfClickedCorrect()
+            changeMechanics()
         }
 
 
@@ -61,8 +69,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=3
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-
-            checkIfClickedCorrect()
+            isClicked=true
+          //  checkIfClickedCorrect()
+            changeMechanics()
 
         }
 
@@ -71,14 +80,18 @@ class Board : AppCompatActivity() {
             currentClickedTile=4
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+           // checkIfClickedCorrect()
+            changeMechanics()
         }
 
         upB5.setOnClickListener{
             currentClickedTile=5
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+          //  checkIfClickedCorrect()
+            changeMechanics()
         }
 
 
@@ -86,7 +99,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=6
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+          //  checkIfClickedCorrect()
+            changeMechanics()
         }
 
 
@@ -94,7 +109,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=7
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+          //  checkIfClickedCorrect()
+            changeMechanics()
         }
 
 
@@ -102,7 +119,9 @@ class Board : AppCompatActivity() {
             currentClickedTile=8
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+          //  checkIfClickedCorrect()
+            changeMechanics()
         }
 
 
@@ -110,28 +129,26 @@ class Board : AppCompatActivity() {
             currentClickedTile=9
             println("Current Clicked : "+ currentClickedTile)
             playSound()
-            checkIfClickedCorrect()
+            isClicked=true
+          //  checkIfClickedCorrect()
+            changeMechanics()
         }
     }
 
     fun checkIfClickedCorrect(){
 
-        if(currentClickedTile!=currentNeededTile){
+// wazne
+
+        /*
+                if(currentClickedTile!=currentNeededTile){
 
             println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
             defeat()
-/*
-            index=0
-            correctTiles= IntArray(10)
-            displayIndex()
-            breakAnimation()
-            animationForOne()
- */
+
         }
 
         if(currentClickedTile==currentNeededTile){
-            // dodajemy po numerze index który trzeba jakos przypisac
-            //np tako  correctTile[index] = currentClickedTile  cos takiego
+
 
             correctTiles[index] = currentClickedTile
 
@@ -143,6 +160,7 @@ class Board : AppCompatActivity() {
             changeColor(index)
 
         }
+         */
 
     }
     fun playSound(){
@@ -170,7 +188,7 @@ class Board : AppCompatActivity() {
 
     }
     fun changeTileColorToBlue(){
-        when (currentNeededTile) {
+        when (currentTileToLightUp) {
 
             1 -> downB1.setBackgroundColor(Color.parseColor("#42aaff"))
             2 -> downB2.setBackgroundColor(Color.parseColor("#42aaff"))
@@ -231,7 +249,7 @@ class Board : AppCompatActivity() {
         println("Nowy index : "+index)
     }
     fun displayIndex(){
-        counterTextView.setText("Current: "+ (index+1)+"/10")
+        counterTextView.text = "Current: "+ (index+1)+"/10"
     }
 
 
@@ -239,13 +257,14 @@ class Board : AppCompatActivity() {
 
 
     fun animationForOne(){
-
+            currentAnimation=1
                 currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(1000, 1000) {
             override fun onTick(arg0: Long) {
 
                 index=0
                 currentNeededTile=currentRandomTile
+                currentTileToLightUp=currentRandomTile
                 changeTileColorToBlue()
 
 
@@ -259,9 +278,10 @@ class Board : AppCompatActivity() {
             }
         }.start()
 
+
     }
     fun animationForTwo(){
-
+        currentAnimation=2
 
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
@@ -275,13 +295,15 @@ class Board : AppCompatActivity() {
                 index=1
 
                 if(countTick==1 && countTick<2){
-                    currentNeededTile= correctTiles[0]
+              //      currentNeededTile= correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=currentRandomTile
+                //    currentNeededTile=currentRandomTile
+                    currentTileToLightUp=currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -297,9 +319,10 @@ class Board : AppCompatActivity() {
         }.start()
 
 
+
     }
     fun animationForThree(){
-
+        currentAnimation=3
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(3000, 1000) {
@@ -309,20 +332,23 @@ class Board : AppCompatActivity() {
                 println("Count Tick : "+ countTick)
 
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+                 //   currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+               //     currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=currentRandomTile
+                 //   currentNeededTile=currentRandomTile
+                    currentTileToLightUp=currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -339,7 +365,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForFour(){
-
+        currentAnimation=4
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(4000, 1000) {
             override fun onTick(arg0: Long) {
@@ -353,25 +379,29 @@ class Board : AppCompatActivity() {
 
 
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+             //       currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                  //  currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                 //   currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                 //   currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -385,7 +415,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForFive(){
-
+        currentAnimation=5
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(5000, 1000) {
             override fun onTick(arg0: Long) {
@@ -397,31 +427,36 @@ class Board : AppCompatActivity() {
 
 
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
+                //    currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
+                //    currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
+                //    currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[3]
+                    currentTileToLightUp=correctTiles[3]
+                 //   currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
+                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -437,7 +472,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForSix(){
-
+        currentAnimation=6
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(6000, 1000) {
             override fun onTick(arg0: Long) {
@@ -449,37 +484,43 @@ class Board : AppCompatActivity() {
 
 
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
+                 //   currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
+                  //  currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
+                 //   currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[3]
+                    currentTileToLightUp=correctTiles[3]
+                 //   currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[4]
+                    currentTileToLightUp=correctTiles[4]
+                //    currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
+                //    currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -495,7 +536,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForSeven() {
-
+        currentAnimation=7
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(7000, 1000) {
             override fun onTick(arg0: Long) {
@@ -504,43 +545,51 @@ class Board : AppCompatActivity() {
 
                 index=6
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+
+                    currentTileToLightUp=correctTiles[0]
+                 //   currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
+                 //   currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
+                 //   currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[3]
+                    currentTileToLightUp=correctTiles[3]
+                 //   currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[4]
+                    currentTileToLightUp=correctTiles[4]
+                //    currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[5]
+                    currentTileToLightUp=correctTiles[5]
+                  //  currentNeededTile=correctTiles[5]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
+                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -554,7 +603,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForEight(){
-
+        currentAnimation=8
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(8000, 1000) {
             override fun onTick(arg0: Long) {
@@ -564,49 +613,57 @@ class Board : AppCompatActivity() {
 
                 index=7
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
+                  //  currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
+                  //  currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
+                 //   currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[3]
+                    currentTileToLightUp=correctTiles[3]
+                  //  currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[4]
+                    currentTileToLightUp=correctTiles[4]
+                  //  currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[5]
+                    currentTileToLightUp=correctTiles[5]
+                  //  currentNeededTile=correctTiles[5]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[6]
+                    currentTileToLightUp=correctTiles[6]
+                  //  currentNeededTile=correctTiles[6]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==8) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
+                  //  currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -621,7 +678,7 @@ class Board : AppCompatActivity() {
         }.start()
     }
     fun animationForNine(){
-
+        currentAnimation=9
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(9000, 1000) {
             override fun onTick(arg0: Long) {
@@ -630,56 +687,65 @@ class Board : AppCompatActivity() {
 
                 index=8
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
+                 //   currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
+                //    currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
+                 //   currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[3]
+                    currentTileToLightUp=correctTiles[3]
+                 //   currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[4]
+                    currentTileToLightUp=correctTiles[4]
+                 //   currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[5]
+                    currentTileToLightUp=correctTiles[5]
+                 //   currentNeededTile=correctTiles[5]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[6]
+                    currentTileToLightUp=correctTiles[6]
+                 //   currentNeededTile=correctTiles[6]
                     changeTileColorToBlue()
                 }
 
 
                 if(countTick==8){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[7]
+                    currentTileToLightUp=correctTiles[7]
+                 //   currentNeededTile=correctTiles[7]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==9) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
+                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -695,72 +761,82 @@ class Board : AppCompatActivity() {
     }
     fun animationForTen(){
         if(isEnd==false){
-
+            currentAnimation=10
 
         currentRandomTile= (Math.floor(Math.random()*9)+1).toInt()
         object : CountDownTimer(10000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
                 println("Count Tick : "+ countTick)
-                counterTextView.setText("Current: 10 / 10")
+                counterTextView.text = "Current: 10 / 10"
                 index=9
                 if(countTick==1){
-                    currentNeededTile=correctTiles[0]
+                    currentTileToLightUp=correctTiles[0]
+                //    currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[1]
+                    currentTileToLightUp=correctTiles[1]
+                //    currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[2]
+                    currentTileToLightUp=correctTiles[2]
+                //    currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[3]
+                    currentTileToLightUp=correctTiles[3]
+                //    currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[4]
+                    currentTileToLightUp=correctTiles[4]
+                //    currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[5]
+                    currentTileToLightUp=correctTiles[5]
+                //    currentNeededTile=correctTiles[5]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[6]
+                    currentTileToLightUp=correctTiles[6]
+                 //   currentNeededTile=correctTiles[6]
                     changeTileColorToBlue()
                 }
 
 
                 if(countTick==8){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[7]
+                    currentTileToLightUp=correctTiles[7]
+                //    currentNeededTile=correctTiles[7]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==9){
                     changeAllTileColorToBlack()
-                    currentNeededTile=correctTiles[8]
+                    currentTileToLightUp=correctTiles[8]
+                 //   currentNeededTile=correctTiles[8]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==10) {
                     changeAllTileColorToBlack()
-                    currentNeededTile = currentRandomTile
+                    currentTileToLightUp=currentRandomTile
+                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -773,6 +849,7 @@ class Board : AppCompatActivity() {
             }
         }.start()
     }}
+
 
 
     fun checkWin(){
@@ -795,6 +872,7 @@ class Board : AppCompatActivity() {
     }
 
     fun defeat(){
+        currentAnimation=0
         val fail = Intent(this, Defeat::class.java)
         fail.putExtra("Color", takedColor)
         fail.putExtra("username", takedName)
@@ -803,8 +881,59 @@ class Board : AppCompatActivity() {
 
 
 
+    //trzeba dodac opcje mechanizmów które podpiete do przycisków oceniają czy jest błąd czy też nie.
+    //Przedewszystkim mam tu na mysli sprawdzanie kolejnosci kombinacji
 
+    fun changeMechanics(){
+        //upewniamy sie ze jest wcisniete by potem nie trzeba było
+        if(isClicked==true){
+            when(currentAnimation){
+                1-> mech1()
+                2-> mech2()
+                3-> mech3()
+                4-> mech4()
+                5-> mech5()
+                6-> mech6()
+                7-> mech7()
+                8-> mech8()
+                9-> mech9()
+                10-> mech10()
+            }
+        }
+    }
 
+    fun mech1(){
+
+        if(currentNeededTile!=currentClickedTile){
+            println("Zły przycisk wcisniety")
+            println("")
+            println("Potrzeba : "+ currentNeededTile+", Wcisniety: "+currentClickedTile)
+            defeat()
+        }
+
+        if(currentNeededTile==currentClickedTile){
+            correctTiles[0]==currentNeededTile
+        }
+
+    }
+
+    fun mech2(){}
+
+    fun mech3(){}
+
+    fun mech4(){}
+
+    fun mech5(){}
+
+    fun mech6(){}
+
+    fun mech7(){}
+
+    fun mech8(){}
+
+    fun mech9(){}
+
+    fun mech10(){}
 
 
 
