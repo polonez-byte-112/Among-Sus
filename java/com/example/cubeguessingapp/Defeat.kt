@@ -60,8 +60,8 @@ class Defeat : AppCompatActivity()  {
         Thread.sleep(400)
         ap.playAudio(this, R.raw.failsound, false)
 
-        endingText.setText(username+" was not An Impostor")
-        coverText.setText(username+" was not An Impostor")
+        endingText.text = username+" was not An Impostor"
+        coverText.text = username+" was not An Impostor"
 
 
         //odslanianie kto zginal

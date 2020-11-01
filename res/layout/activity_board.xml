@@ -17,6 +17,7 @@
         android:layout_weight="1"
         android:background="@drawable/bg_box"
         android:gravity="center"
+        android:padding="1dp"
         android:text="Done : X/10"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -300,5 +301,19 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_box"
+        android:padding="1dp"
+        android:text="Press Combination after Animation!"
+        android:textColor="#E91E63"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/counterTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

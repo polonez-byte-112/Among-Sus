@@ -8,8 +8,4 @@ This files is a contaiment of main folder. I cannot upload full project becouse 
 To install it make a project with same name (and no activity) and copy those files
 
 
-# About Current situation
-V1 is Done
 
-
-v2 in progress
