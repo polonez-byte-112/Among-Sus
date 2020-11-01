@@ -17,8 +17,8 @@ class Win : AppCompatActivity() {
 
         username = intent.getStringExtra("name").toString()
         ap.playAudio(this ,R.raw.win_sound, false)
-        coverWinText.setText("Player \""+username+"\" won!")
-        winText.setText("Player "+username+" won!")
+        coverWinText.text = "Player \""+username+"\" won!"
+        winText.text = "Player "+username+" won!"
 
         winButton.setOnClickListener {
             ap.stopAudio()

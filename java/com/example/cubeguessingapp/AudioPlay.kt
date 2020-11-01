@@ -2,7 +2,7 @@ package com.example.cubeguessingapp
 
 import android.content.Context
 import android.media.MediaPlayer
-
+import java.lang.Exception
 
 
 object AudioPlay {
@@ -23,6 +23,7 @@ object AudioPlay {
             if (!it.isPlaying) {
                 it.start()
             }
+
 
 
         }
