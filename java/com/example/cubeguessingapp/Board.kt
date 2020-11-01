@@ -55,7 +55,7 @@ var currentAnimation=0
 
         upB1.setOnClickListener{
             currentClickedTile=1
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
         //    checkIfClickedCorrect()
@@ -68,7 +68,7 @@ var currentAnimation=0
 
         upB2.setOnClickListener{
             currentClickedTile=2
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
          //   checkIfClickedCorrect()
@@ -79,7 +79,7 @@ var currentAnimation=0
         upB3.setOnClickListener{
 
             currentClickedTile=3
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
           //  checkIfClickedCorrect()
@@ -90,7 +90,7 @@ var currentAnimation=0
 
         upB4.setOnClickListener{
             currentClickedTile=4
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
            // checkIfClickedCorrect()
@@ -99,7 +99,7 @@ var currentAnimation=0
 
         upB5.setOnClickListener{
             currentClickedTile=5
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
           //  checkIfClickedCorrect()
@@ -109,7 +109,7 @@ var currentAnimation=0
 
         upB6.setOnClickListener{
             currentClickedTile=6
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
           //  checkIfClickedCorrect()
@@ -119,7 +119,7 @@ var currentAnimation=0
 
         upB7.setOnClickListener{
             currentClickedTile=7
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
           //  checkIfClickedCorrect()
@@ -129,7 +129,7 @@ var currentAnimation=0
 
         upB8.setOnClickListener{
             currentClickedTile=8
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
           //  checkIfClickedCorrect()
@@ -139,7 +139,7 @@ var currentAnimation=0
 
         upB9.setOnClickListener{
             currentClickedTile=9
-            println("Current Clicked : "+ currentClickedTile)
+
             playSound()
             isClicked=true
           //  checkIfClickedCorrect()
@@ -147,34 +147,7 @@ var currentAnimation=0
         }
     }
 
-    fun checkIfClickedCorrect(){
 
-// wazne
-
-        /*
-                if(currentClickedTile!=currentNeededTile){
-
-            println("Wcisniety: "+currentClickedTile +",  Potrzebowany: "+currentNeededTile)
-            defeat()
-
-        }
-
-        if(currentClickedTile==currentNeededTile){
-
-
-            correctTiles[index] = currentClickedTile
-
-            changeIndex()
-            displayIndex()
-
-           if(isEnd==true){ checkWin()}
-            //  zmieniamy kolor dla nowego
-            changeColor(index)
-
-        }
-         */
-
-    }
     fun playSound(){
 
         if(currentClickedTile!=0){
@@ -258,7 +231,7 @@ var currentAnimation=0
         }
 
 
-        println("Nowy index : "+index)
+
     }
     fun displayIndex(){
         counterTextView.text = "Current: "+ (index+1)+"/10"
@@ -303,7 +276,7 @@ var currentAnimation=0
             override fun onTick(arg0: Long) {
 
                 countTick++
-                println("Count Tick : "+ countTick)
+
                 index=1
 
                 if(countTick==1 && countTick<2){
@@ -342,7 +315,7 @@ var currentAnimation=0
             override fun onTick(arg0: Long) {
                 countTick++
                 index=2
-                println("Count Tick : "+ countTick)
+
 
                 if(countTick==1){
                  //   currentNeededTile=correctTiles[0]
@@ -384,7 +357,7 @@ var currentAnimation=0
         object : CountDownTimer(4000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
-                println("Count Tick : "+ countTick)
+
 
 
 
@@ -436,7 +409,7 @@ var currentAnimation=0
             override fun onTick(arg0: Long) {
 
                 countTick++
-                println("Count Tick : "+ countTick)
+
 
                 index=4
 
@@ -494,7 +467,7 @@ var currentAnimation=0
             override fun onTick(arg0: Long) {
 
                 countTick++
-                println("Count Tick : "+ countTick)
+
 
                 index=5
 
@@ -558,7 +531,7 @@ var currentAnimation=0
         object : CountDownTimer(7000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
-                println("Count Tick : "+ countTick)
+
 
                 index=6
                 if(countTick==1){
@@ -627,7 +600,7 @@ var currentAnimation=0
             override fun onTick(arg0: Long) {
 
                 countTick++
-                println("Count Tick : "+ countTick)
+
 
                 index=7
                 if(countTick==1){
@@ -702,7 +675,7 @@ var currentAnimation=0
         object : CountDownTimer(9000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
-                println("Count Tick : "+ countTick)
+
 
                 index=8
                 if(countTick==1){
@@ -787,7 +760,7 @@ var currentAnimation=0
         object : CountDownTimer(10000, 1000) {
             override fun onTick(arg0: Long) {
                 countTick++
-                println("Count Tick : "+ countTick)
+
                 counterTextView.text = "Current: 10 / 10"
                 index=9
                 if(countTick==1){
@@ -874,7 +847,7 @@ var currentAnimation=0
 
     fun checkWin(){
 
-        println(Arrays.toString(correctTiles))
+
         var countGoodOnes=0
         for (x in 9 downTo 0 step 1){
 
@@ -908,7 +881,9 @@ var currentAnimation=0
     //Przedewszystkim mam tu na mysli sprawdzanie kolejnosci kombinacji
 
     fun changeMechanics(){
-        //upewniamy sie ze jest wcisniete by potem nie trzeba było
+
+        this.cacheDir.deleteRecursively()
+
         if(isClicked==true){
             isClicked=false
 
@@ -928,22 +903,19 @@ var currentAnimation=0
     }
 
     fun mech1(){
-        println("MECHANIZM 1 DZIALA")
+
 
 
 
         if(currentNeededTile==currentClickedTile){
 
             correctTiles[index]=currentNeededTile
-            println("Correct Tiles  :"+Arrays.toString(correctTiles))
+
             changeIndex()
             displayIndex()
             changeColor(index)
             countClicks=0
         }else{
-            println("Zły przycisk wcisniety")
-            println("")
-            println("Potrzeba : "+ currentNeededTile+", Wcisniety: "+currentClickedTile)
             defeat()
         }
 
@@ -952,68 +924,563 @@ var currentAnimation=0
     fun mech2(){
 
 
-        println("MECHANIZM 2 DZIALA")
+
 
 
 
         if(countClicks==0 ){
-
             if(correctTiles[0].equals(currentClickedTile)){
-                println("Wcisniety 1 ponownie :O")
                 countClicks=countClicks+1
             }else{
-                println("Zły przycisk wcisniety")
-                println("")
-                println("Potrzeba : "+ correctTiles[0]+", Wcisniety: "+currentClickedTile)
                 defeat()
             }
         }else if(countClicks==1){
-            println("Teraz pora na drugi !!!")
+
             if(currentClickedTile==random2){
-                println("Przycisk 2 wcisniety kurwa XDDD")
-                println("Obecny index :"+index)
+
                 correctTiles[index]=random2
-                println("Correct Tiles  :"+Arrays.toString(correctTiles))
+
                 changeIndex()
                 displayIndex()
                 changeColor(index)
-                countClicks=countClicks+1
+                countClicks=0
             }else{
-                println("Zły przycisk wcisniety")
-                println("")
-                println("Potrzeba : "+ correctTiles+", Wcisniety: "+currentClickedTile)
                 defeat()
             }
 
         }
 
-        println("Wcisniecia" +countClicks)
+
+
 
     }
 
-    fun mech3(){}
-
-    fun mech4(){}
-
-    fun mech5(){}
-
-    fun mech6(){}
-
-    fun mech7(){}
-
-    fun mech8(){}
-
-    fun mech9(){}
-
-    fun mech10(){}
+    fun mech3(){
 
 
 
 
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(currentClickedTile==random3){
+
+                correctTiles[index]=random3
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
+
+    fun mech4(){
 
 
 
 
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+
+        }else if(countClicks==3){
+
+            if(currentClickedTile==random4){
+
+                correctTiles[index]=random4
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+
+    }
+
+    fun mech5(){
+
+
+
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==3){
+            if(correctTiles[3].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==4){
+
+            if(currentClickedTile==random5){
+
+                correctTiles[index]=random5
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
+
+    fun mech6(){
+
+
+
+
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==3){
+            if(correctTiles[3].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==4){
+            if(correctTiles[4].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==5){
+
+            if(currentClickedTile==random6){
+
+                correctTiles[index]=random6
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
+
+    fun mech7(){
+
+
+
+
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==3){
+            if(correctTiles[3].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==4){
+            if(correctTiles[4].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==5){
+            if(correctTiles[5].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==6){
+
+            if(currentClickedTile==random7){
+
+                correctTiles[index]=random7
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
+
+    fun mech8(){
+
+
+
+
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==3){
+            if(correctTiles[3].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==4){
+            if(correctTiles[4].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==5){
+            if(correctTiles[5].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==6){
+            if(correctTiles[6].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==7){
+
+            if(currentClickedTile==random8){
+
+                correctTiles[index]=random8
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
+
+    fun mech9(){
+
+
+
+
+
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==3){
+            if(correctTiles[3].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==4){
+            if(correctTiles[4].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==5){
+            if(correctTiles[5].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==6){
+            if(correctTiles[6].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==7){
+            if(correctTiles[7].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==8){
+
+            if(currentClickedTile==random9){
+
+                correctTiles[index]=random9
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
+
+    fun mech10(){
+
+
+
+
+
+
+        if(countClicks==0 ){
+            if(correctTiles[0].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+
+                defeat()
+            }
+        }else if(countClicks==1){
+            if(correctTiles[1].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==2){
+            if(correctTiles[2].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==3){
+            if(correctTiles[3].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==4){
+            if(correctTiles[4].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==5){
+            if(correctTiles[5].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }else if(countClicks==6){
+            if(correctTiles[6].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==7){
+            if(correctTiles[7].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==8){
+            if(correctTiles[8].equals(currentClickedTile)){
+                countClicks=countClicks+1
+            }else{
+                defeat()
+            }
+
+        }
+        else if(countClicks==9){
+
+            if(currentClickedTile==random10){
+
+                correctTiles[index]=random10
+
+                changeIndex()
+                displayIndex()
+                changeColor(index)
+                countClicks=0
+                checkWin()
+            }else{
+                defeat()
+            }
+
+        }
+
+
+    }
 
 
 }
