@@ -55,10 +55,7 @@ var currentAnimation=0
 
         upB1.setOnClickListener{
             currentClickedTile=1
-
-            playSound()
             isClicked=true
-        //    checkIfClickedCorrect()
             changeMechanics()
 
 
@@ -68,10 +65,7 @@ var currentAnimation=0
 
         upB2.setOnClickListener{
             currentClickedTile=2
-
-            playSound()
             isClicked=true
-         //   checkIfClickedCorrect()
             changeMechanics()
         }
 
@@ -79,10 +73,7 @@ var currentAnimation=0
         upB3.setOnClickListener{
 
             currentClickedTile=3
-
-            playSound()
             isClicked=true
-          //  checkIfClickedCorrect()
             changeMechanics()
 
         }
@@ -90,62 +81,45 @@ var currentAnimation=0
 
         upB4.setOnClickListener{
             currentClickedTile=4
-
-            playSound()
             isClicked=true
-           // checkIfClickedCorrect()
             changeMechanics()
         }
 
         upB5.setOnClickListener{
             currentClickedTile=5
-
-            playSound()
             isClicked=true
-          //  checkIfClickedCorrect()
             changeMechanics()
         }
 
 
         upB6.setOnClickListener{
             currentClickedTile=6
-
-            playSound()
             isClicked=true
-          //  checkIfClickedCorrect()
             changeMechanics()
         }
 
 
         upB7.setOnClickListener{
             currentClickedTile=7
-
-            playSound()
             isClicked=true
-          //  checkIfClickedCorrect()
             changeMechanics()
         }
 
 
         upB8.setOnClickListener{
             currentClickedTile=8
-
-            playSound()
             isClicked=true
-          //  checkIfClickedCorrect()
             changeMechanics()
         }
 
 
         upB9.setOnClickListener{
             currentClickedTile=9
-
-            playSound()
             isClicked=true
-          //  checkIfClickedCorrect()
             changeMechanics()
         }
     }
+
 
 
     fun playSound(){
@@ -155,23 +129,121 @@ var currentAnimation=0
 
         }
 
-/* tymczasowo wylaczam
-        if(correctTile==true && badTile==false){
-            ap.playAudio(this, R.raw.good_click,false)
 
-        }
-
-        if(correctTile==false && badTile==true){
-
-            ap.playAudio(this, R.raw.fail_click,false)
-
-        }
-
- */
 
         this.cacheDir.deleteRecursively()
 
     }
+    fun playSound2(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click2,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound3(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click3,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound4(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click4,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound5(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click5,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound6(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click6,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound7(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click7,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound8(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click8,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound9(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click9,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+    fun playSound10(){
+
+        if(currentClickedTile!=0){
+            ap.playAudio(this, R.raw.good_click10,false)
+
+        }
+
+
+
+        this.cacheDir.deleteRecursively()
+
+    }
+
+
     fun changeTileColorToBlue(){
         when (currentTileToLightUp) {
 
@@ -252,7 +324,7 @@ var currentAnimation=0
                 currentTileToLightUp=currentRandomTile
                 changeTileColorToBlue()
 
-
+                playSound()
 
 
 
@@ -280,14 +352,14 @@ var currentAnimation=0
                 index=1
 
                 if(countTick==1 && countTick<2){
-              //      currentNeededTile= correctTiles[0]
+
                     currentTileToLightUp=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound2()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                //    currentNeededTile=currentRandomTile
                     currentTileToLightUp=currentRandomTile
                     changeTileColorToBlue()
                 }
@@ -318,14 +390,13 @@ var currentAnimation=0
 
 
                 if(countTick==1){
-                 //   currentNeededTile=correctTiles[0]
                     currentTileToLightUp=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound3()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-               //     currentNeededTile=correctTiles[1]
                     currentTileToLightUp=correctTiles[1]
                     changeTileColorToBlue()
                 }
@@ -333,7 +404,6 @@ var currentAnimation=0
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                 //   currentNeededTile=currentRandomTile
                     currentTileToLightUp=currentRandomTile
                     changeTileColorToBlue()
                 }
@@ -366,28 +436,25 @@ var currentAnimation=0
 
 
                 if(countTick==1){
-             //       currentNeededTile=correctTiles[0]
                     currentTileToLightUp=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound4()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
-                  //  currentNeededTile=correctTiles[1]
                     currentTileToLightUp=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
-                 //   currentNeededTile=correctTiles[2]
                     currentTileToLightUp=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4) {
                     changeAllTileColorToBlack()
-                 //   currentNeededTile = currentRandomTile
                     currentTileToLightUp=currentRandomTile
                     changeTileColorToBlue()
                 }
@@ -416,35 +483,31 @@ var currentAnimation=0
 
                 if(countTick==1){
                     currentTileToLightUp=correctTiles[0]
-                //    currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound5()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[1]
-                //    currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[2]
-                //    currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[3]
-                 //   currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5) {
                     changeAllTileColorToBlack()
                     currentTileToLightUp=currentRandomTile
-                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -474,42 +537,38 @@ var currentAnimation=0
 
                 if(countTick==1){
                     currentTileToLightUp=correctTiles[0]
-                 //   currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound6()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[1]
-                  //  currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[2]
-                 //   currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[3]
-                 //   currentNeededTile=correctTiles[3]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[4]
-                //    currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6) {
                     changeAllTileColorToBlack()
                     currentTileToLightUp=currentRandomTile
-                //    currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -537,49 +596,48 @@ var currentAnimation=0
                 if(countTick==1){
 
                     currentTileToLightUp=correctTiles[0]
-                 //   currentNeededTile=correctTiles[0]
+                    playSound7()
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[1]
-                 //   currentNeededTile=correctTiles[1]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[2]
-                 //   currentNeededTile=correctTiles[2]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[3]
-                 //   currentNeededTile=correctTiles[3]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[4]
-                //    currentNeededTile=correctTiles[4]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[5]
-                  //  currentNeededTile=correctTiles[5]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7) {
                     changeAllTileColorToBlack()
                     currentTileToLightUp=currentRandomTile
-                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -605,57 +663,53 @@ var currentAnimation=0
                 index=7
                 if(countTick==1){
                     currentTileToLightUp=correctTiles[0]
-                  //  currentNeededTile=correctTiles[0]
+                    playSound8()
                     changeTileColorToBlue()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[1]
-                  //  currentNeededTile=correctTiles[1]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[2]
-                 //   currentNeededTile=correctTiles[2]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[3]
-                  //  currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[4]
-                  //  currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[5]
-                  //  currentNeededTile=correctTiles[5]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[6]
-                  //  currentNeededTile=correctTiles[6]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==8) {
                     changeAllTileColorToBlack()
                     currentTileToLightUp=currentRandomTile
-                  //  currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
+
                 }
 
 
@@ -680,49 +734,46 @@ var currentAnimation=0
                 index=8
                 if(countTick==1){
                     currentTileToLightUp=correctTiles[0]
-                 //   currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound9()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[1]
-                //    currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[2]
-                 //   currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[3]
-                 //   currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[4]
-                 //   currentNeededTile=correctTiles[4]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[5]
-                 //   currentNeededTile=correctTiles[5]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[6]
-                 //   currentNeededTile=correctTiles[6]
+
                     changeTileColorToBlue()
                 }
 
@@ -730,14 +781,12 @@ var currentAnimation=0
                 if(countTick==8){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[7]
-                 //   currentNeededTile=correctTiles[7]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==9) {
                     changeAllTileColorToBlack()
                     currentTileToLightUp=currentRandomTile
-                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
                 }
 
@@ -765,49 +814,43 @@ var currentAnimation=0
                 index=9
                 if(countTick==1){
                     currentTileToLightUp=correctTiles[0]
-                //    currentNeededTile=correctTiles[0]
                     changeTileColorToBlue()
+                    playSound10()
                 }
 
                 if(countTick==2){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[1]
-                //    currentNeededTile=correctTiles[1]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==3){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[2]
-                //    currentNeededTile=correctTiles[2]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==4){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[3]
-                //    currentNeededTile=correctTiles[3]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==5){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[4]
-                //    currentNeededTile=correctTiles[4]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==6){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[5]
-                //    currentNeededTile=correctTiles[5]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==7){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[6]
-                 //   currentNeededTile=correctTiles[6]
                     changeTileColorToBlue()
                 }
 
@@ -815,22 +858,21 @@ var currentAnimation=0
                 if(countTick==8){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[7]
-                //    currentNeededTile=correctTiles[7]
                     changeTileColorToBlue()
                 }
 
                 if(countTick==9){
                     changeAllTileColorToBlack()
                     currentTileToLightUp=correctTiles[8]
-                 //   currentNeededTile=correctTiles[8]
+
                     changeTileColorToBlue()
                 }
 
                 if(countTick==10) {
                     changeAllTileColorToBlack()
                     currentTileToLightUp=currentRandomTile
-                 //   currentNeededTile = currentRandomTile
                     changeTileColorToBlue()
+
                 }
 
 
