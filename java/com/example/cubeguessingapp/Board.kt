@@ -123,124 +123,64 @@ var currentAnimation=0
 
 
     fun playSound(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+             this.cacheDir.deleteRecursively()
 
     }
     fun playSound2(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click2,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound3(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click3,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound4(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click4,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound5(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click5,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound6(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click6,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound7(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click7,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound8(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click8,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+             this.cacheDir.deleteRecursively()
 
     }
     fun playSound9(){
 
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click9,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
+            this.cacheDir.deleteRecursively()
 
     }
     fun playSound10(){
-
-        if(currentClickedTile!=0){
             ap.playAudio(this, R.raw.good_click10,false)
 
-        }
-
-
-
-        this.cacheDir.deleteRecursively()
-
+            this.cacheDir.deleteRecursively()
     }
 
 
@@ -271,7 +211,7 @@ var currentAnimation=0
     }
 
     fun changeColor(i: Int?){
-        //tutaj funkcja która będzie zmieniać kolor
+
 
         when(i){
             0-> animationForOne()
@@ -310,7 +250,7 @@ var currentAnimation=0
     }
 
 
-    //Animacje
+
 
 
     fun animationForOne(){
@@ -323,7 +263,6 @@ var currentAnimation=0
                 currentNeededTile=currentRandomTile
                 currentTileToLightUp=currentRandomTile
                 changeTileColorToBlue()
-
                 playSound()
 
 
@@ -919,8 +858,7 @@ var currentAnimation=0
 
 
 
-    //trzeba dodac opcje mechanizmów które podpiete do przycisków oceniają czy jest błąd czy też nie.
-    //Przedewszystkim mam tu na mysli sprawdzanie kolejnosci kombinacji
+
 
     fun changeMechanics(){
 
